@@ -13,30 +13,26 @@ export default class Cart {
 
     sumPrices(): number {
         const items: Buyable[] = this.items;
-        let sum: number = 0;
-        for (let item of items) {
-            sum += item.price;
-        }
+        let sum = items.reduce((sum, item) => sum + item.price, 0);
         return sum;
     }
 
     sumPricesWithBonus(bonus: number): number {
-        const items: Buyable[] = this.items;
-        let sum: number = 0;
-        for (let item of items) {
-            sum += item.price;
-        }
-        let ourBonus: number =  (sum / 100) * bonus;
+        let sum = this.sumPrices()
+        let ourBonus = (sum / 100) * bonus;
         return sum - ourBonus;
     }
 
     deleteItem(id: number): void {
         const items: Buyable[] = this.items;
-        for (let i = 0; i < items.length; i++) {
-            if (items[i].id == id) {
-                this._items.splice(i, 1);
-                break;
-            }
-        }
+        // for (let i = 0; i < items.length; i++) {
+        //     if (items[i].id == id) {
+        //         this._items.splice(i, 1);
+        //         break;
+        //     }
+        // }
+        const result = items.filter(item => item.id == id);
+        const index = this._items.indexOf(result[0]);
+        this._items.splice(index, 1);
     }
 }
