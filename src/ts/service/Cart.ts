@@ -25,12 +25,6 @@ export default class Cart {
 
     deleteItem(id: number): void {
         const items: Buyable[] = this.items;
-        // for (let i = 0; i < items.length; i++) {
-        //     if (items[i].id == id) {
-        //         this._items.splice(i, 1);
-        //         break;
-        //     }
-        // }
         const result = items.filter(item => item.id == id);
         const index = this._items.indexOf(result[0]);
         this._items.splice(index, 1);
